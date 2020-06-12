@@ -25,15 +25,18 @@ class Fabula extends Component {
         const storyLines = story.content.map((line, index) => {
             const wordButtons = line
                 .split(' ')
-                .map((word, i) => {  
-                    return (
-                        <button 
-                            key={i} 
-                            onClick={(e)=> this.setCurrentWord(e, `line:${index + 1}_word:${i + 1}`)}
-                        >
-                            {word}
-                        </button>
-                    );
+                .map((word, i) => {
+                    if (Object.keys(story.vocab).includes(`line:${index + 1}_word:${i + 1}`)) {  
+                        return (
+                            <button 
+                                key={i} 
+                                onClick={(e)=> this.setCurrentWord(e, `line:${index + 1}_word:${i + 1}`)}
+                            >
+                                {word}
+                            </button>
+                        );
+                    }
+                    return <span key={i}>{` ${word} `}</span>;
                 }); 
             return (
                 <li key={index}>
