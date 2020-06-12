@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import WordsList from '../WordsList/WordsList';
 import STORE from '../STORE';
-
+import './Fabula.css';
 
 class Fabula extends Component {
 
@@ -44,15 +44,15 @@ class Fabula extends Component {
                 </li>);
             });
         return (
-            <div className="Fabula__container">
-                <article>
+            <>
+                <article className="Fabula__container">
                     <h3>{story.title}</h3>
                     <ol>
                         {storyLines}
                     </ol>
                 </article>
                 <WordsList currentWord={this.state.currentWord}/>
-            </div>
+            </>
         );
     }
 }

@@ -1,0 +1,9 @@
+.WordsList__container {
+    position: fixed;
+    right: 0;
+    top: 75px;
+    border-left: 1px solid #000000;
+    padding: 0 5px;
+    height: calc(100vh - 75px);
+    width: 20%;
+}

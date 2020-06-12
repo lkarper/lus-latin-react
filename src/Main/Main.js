@@ -4,6 +4,7 @@ import Home from '../Home/Home';
 import Blog from '../Blog/Blog';
 import Fabulae from '../Fabulae/Fabulae';
 import AP from '../AP/AP';
+import './Main.css';
 
 class Main extends Component {
     render() {
