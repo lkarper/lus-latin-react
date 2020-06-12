@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import Home from '../Home/Home';
 import Blog from '../Blog/Blog';
 import Fabulae from '../Fabulae/Fabulae';
-import Res from '../Res/Res';
 import AP from '../AP/AP';
 
 class Main extends Component {
@@ -19,12 +18,8 @@ class Main extends Component {
                     component={Blog}
                 />
                 <Route 
-                    path="/fabulae"
+                    path="/fabulae/:genre"
                     component={Fabulae}
-                />
-                <Route 
-                    path="/res"
-                    component={Res}
                 />
                 <Route 
                     path="/ap"

@@ -21,13 +21,13 @@ const Nav = () => {
                         Blog
                     </NavLink></li>
                     <li><NavLink
-                        to='/fabulae'
+                        to='/fabulae/latinae'
                         activeClassName="Nav__selected"
                     >
                         Fabulae Latinae
                     </NavLink></li>
                     <li><NavLink
-                        to='/res'
+                        to='/fabulae/romanae'
                         activeClassName="Nav__selected"
                     >
                         Res Romanae Latine Scriptae
