@@ -22,7 +22,13 @@ const STORE = {
                 "Spīnōsa nōn laeta est et amīcum vult.",
                 "\"Volō cum amīcō in silvā ambulāre!\", dīcit Spīnōsa.",
                 "Spīnōsa amīcum vult, ergō amīcum quaerit."
-            ]
+            ],
+            "vocab": {
+                "line:1_word:2": {
+                    "word": "ēricia",
+                    "def": "Animal parvum quod spīnās habet."
+                }
+            }
         }
     },
     "romanae": {
@@ -55,7 +61,13 @@ const STORE = {
                 "Quid cēnsēs?",
                 "Sumne egō mendāx?",
                 "Sī egō mendāx sum, abeō in malam rem!"
-            ]
+            ],
+            "vocab": {
+                "line:1_word:2": {
+                    "word": "servus",
+                    "def": "Homō quī servat."
+                }
+            }
         }
     }
 }
