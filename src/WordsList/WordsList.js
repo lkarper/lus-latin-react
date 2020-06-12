@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 class WordsList extends Component {
 
+    static defaultProps = {
+        currentWord: {}
+    }
+
     state = {
         wordsList: [],
     }
@@ -43,7 +47,7 @@ class WordsList extends Component {
             <div className="WordsList__container">
                 <div className="WordsList__currentWord">
                     <h3>Verbum Electum</h3>
-                    {this.props.currentWord ? currentWordHTML : <p>Click on a word to view its definition.</p>}
+                    {Object.keys(this.props.currentWord).length ? currentWordHTML : <p>Click on a word to view its definition.</p>}
                 </div>
                 <div className="WordsList__list">
                     <ol>
