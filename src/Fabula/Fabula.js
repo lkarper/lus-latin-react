@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import WordsList from '../WordsList/WordsList';
 import ENV from '../config';
 import './Fabula.css';
 
 class Fabula extends Component {
+
+    static defaultProps = {
+        match: {
+            params: {
+                genre: '',
+                id: '',
+            },
+        },
+    }
 
     state = {
         story: {},
@@ -76,6 +86,15 @@ class Fabula extends Component {
             return <p className="Fabula__loading">Loading...</p>;
         }
     }
+}
+
+Fabula.propTypes = {
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            genre: PropTypes.string,
+            id: PropTypes.string,
+        }),
+    }),
 }
 
 export default Fabula;
