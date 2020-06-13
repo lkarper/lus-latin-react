@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AP component renders the UI as expected 1`] = `
+<main>
+  <h2>
+    AP Latin
+  </h2>
+  <section>
+    <h3>
+      Deserunt proident fugiat reprehenderit irure et ea nisi ea.
+    </h3>
+    <p>
+      Eu incididunt voluptate occaecat do enim nulla nisi ut commodo ex. Irure aliquip est ut id. Amet anim incididunt minim nisi labore qui id tempor consequat exercitation magna laboris ex labore. Velit nisi elit nulla fugiat.
+    </p>
+  </section>
+</main>
+`;
