@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ENV from '../config';
 
-class Fabulae extends Component {
+class FabulaeList extends Component {
+
+    static defaultProps = {
+        match: {
+            params: {
+                genre: '',
+            }
+        }
+    }
 
     state = {
         fabulae: [],
@@ -71,4 +80,12 @@ class Fabulae extends Component {
     }
 }
 
-export default Fabulae;
+FabulaeList.propTypes = {
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            genre: PropTypes.string,
+        }),
+    }),
+}
+
+export default FabulaeList;
