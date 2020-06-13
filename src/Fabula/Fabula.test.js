@@ -11,7 +11,7 @@ describe('Fabula component', () => {
         ReactDOM.unmountComponentAtNode(div);
     });
 
-    it('render the UI as expected', () => {
+    it('renders the UI as expected', () => {
         const wrapper = shallow(<Fabula />);
         expect(toJSON(wrapper)).toMatchSnapshot();
     });
