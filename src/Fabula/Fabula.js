@@ -29,8 +29,7 @@ class Fabula extends Component {
         });
     }
 
-    componentDidMount() {
-        const { genre, id } = this.props.match.params;
+    fetchFabula = (genre, id) => {
         const url = `http://localhost:8000/fabulae?genre=${genre}&id=${id}`;
         const options = { 
             headers: new Headers({
@@ -45,6 +44,18 @@ class Fabula extends Component {
                 });
                 console.log(data);
             });
+    }
+
+    componentDidMount() {
+        const { genre, id } = this.props.match.params;
+        this.fetchFabula(genre, id);
+    }
+
+    componentDidUpdate(prevProps) {
+        const { genre, id } = this.props.match.params;
+        if (prevProps.match.params.genre !== genre || prevProps.match.params.id !== id) {
+            this.fetchFabula(genre, id);
+        }
     }
 
     render() {

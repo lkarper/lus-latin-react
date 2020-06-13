@@ -40,9 +40,11 @@ class FabulaeList extends Component {
         this.fetchFabulae(genre);
     }
 
-    componentWillReceiveProps(nextProps) {
-        const { genre } = nextProps.match.params;
-        this.fetchFabulae(genre);
+    componentDidUpdate(prevProps) {
+        const { genre } = this.props.match.params;
+        if (prevProps.match.params.genre !== genre) {
+            this.fetchFabulae(genre);
+        }
     }
 
     render() {

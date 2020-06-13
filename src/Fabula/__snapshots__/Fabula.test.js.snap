@@ -1,13 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Fabula component render the UI as expected 1`] = `
-<p
-  className="Fabula__loading"
->
-  Loading...
-</p>
-`;
-
 exports[`Fabula component renders the UI as expected 1`] = `
 <p
   className="Fabula__loading"
