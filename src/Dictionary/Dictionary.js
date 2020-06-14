@@ -7,10 +7,10 @@ class Dictionary extends Component {
 
     state = {
         wordsData: {},
+        exact: false,
     }
 
-    onSearch = (searchObject) => {
-        const { word, exact } = searchObject;
+    onSearch = (word, exact) => {
         const url = `http://localhost:8000/dictionary?word=${word}&exact=${exact}`;
         const options = { 
             headers: new Headers({
@@ -26,18 +26,27 @@ class Dictionary extends Component {
             })
             .then(wordsData => {
                 console.log(wordsData);
-                this.setState({wordsData});
+                this.setState({wordsData, exact});
             })
             .catch(error => {
                 console.log(error);
             });
     }
 
+    componentDidMount() {
+        const { word = "", exact = "" } = this.props.match.params;
+        if (word && exact) {
+            this.onSearch(word, true);
+        } else if (word) {
+            this.onSearch(word, false);
+        }
+    }
+
     render() {
         return (
             <main>
                 <DictionaryForm onSearch={this.onSearch}/>
-                <DictionaryResult data={this.state.wordsData} />
+                <DictionaryResult data={this.state.wordsData} exact={this.state.exact} />
             </main>
         );
     }

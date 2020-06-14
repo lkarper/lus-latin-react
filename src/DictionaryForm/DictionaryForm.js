@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 
 class DictionaryForm extends Component {
 
     state = {
         word: '',
-        exact: false,
     }
 
     search = (e, exact) => {
         e.preventDefault();
-        this.setState({ exact }, () => this.props.onSearch(this.state));
+        this.props.onSearch(this.state.word, exact);
+        this.props.history.push(`/dictionary/${this.state.word}/${exact ? 'exact' : ''}`);
+    }
+
+    componentDidMount() {
+        const { word = "" } = this.props.match.params;
+        if (word) {
+            this.setState({ word });
+        }
     }
 
     render() {
@@ -25,6 +33,7 @@ class DictionaryForm extends Component {
                     aria-label="Enter a word to search the dictionary."
                     aria-required="true"
                     required
+                    value={this.state.word}
                     onChange={e => this.setState({ word: e.target.value })}
                 />
                 <button 
@@ -43,4 +52,4 @@ class DictionaryForm extends Component {
     }
 }
 
-export default DictionaryForm;
+export default withRouter(DictionaryForm);

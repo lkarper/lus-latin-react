@@ -28,7 +28,7 @@ class Main extends Component {
                     component={AP}
                 />
                 <Route 
-                    path="/dictionary"
+                    exact path={["/dictionary", "/dictionary/:word/:exact", "/dictionary/:word"]}
                     component={Dictionary}
                 />
             </div>
