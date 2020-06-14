@@ -38,6 +38,12 @@ const Nav = () => {
                     >
                         AP Latin
                     </NavLink></li>
+                    <li><NavLink
+                        to='/dictionary'
+                        activeClassName="Nav__selected"
+                    >
+                        Dictionary
+                    </NavLink></li>
                 </ul>
             </nav>
         </header>

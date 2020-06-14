@@ -5,6 +5,7 @@ import Blog from '../Blog/Blog';
 import Fabulae from '../Fabulae/Fabulae';
 import AP from '../AP/AP';
 import './Main.css';
+import Dictionary from '../Dictionary/Dictionary';
 
 class Main extends Component {
     render() {
@@ -25,6 +26,10 @@ class Main extends Component {
                 <Route 
                     path="/ap"
                     component={AP}
+                />
+                <Route 
+                    path="/dictionary"
+                    component={Dictionary}
                 />
             </div>
         );
