@@ -18,6 +18,8 @@ class Fabula extends Component {
     state = {
         story: {},
         currentWord: {},
+        invalidURL: false,
+        fileNotFound: false,
     }
 
     setCurrentWord = (e, place) => {
@@ -29,6 +31,19 @@ class Fabula extends Component {
         });
     }
 
+    validateURL = (genre, id) => {
+        if (!genre || (genre !== 'latinae' && genre !== 'romanae')) {
+            this.setState({
+                invalidURL: true,
+            });
+        } else {
+            this.setState({
+                invalidURL: false,
+            }, () => this.fetchFabula(genre, id));
+        }
+    }
+
+    // TODO: update error handling for id not found
     fetchFabula = (genre, id) => {
         const url = `http://localhost:8000/fabulae/${genre}/${id}`;
         const options = { 
@@ -40,6 +55,9 @@ class Fabula extends Component {
             .then(res => {
                 if (res.ok) {
                     return res.json();
+                }
+                if (res.status === 404) {
+                    this.setState({ fileNotFound: true });
                 }
                 throw new Error (res.statusText);
             })
@@ -56,19 +74,33 @@ class Fabula extends Component {
 
     componentDidMount() {
         const { genre, id } = this.props.match.params;
-        this.fetchFabula(genre, id);
+        this.validateURL(genre, id);
     }
 
     componentDidUpdate(prevProps) {
         const { genre, id } = this.props.match.params;
         if (prevProps.match.params.genre !== genre || prevProps.match.params.id !== id) {
-            this.fetchFabula(genre, id);
+            this.validateURL(genre, id);
         }
     }
 
     render() {
         const { story } = this.state;
-        if (Object.keys(story).length) {
+        if (this.state.invalidURL) {
+            return (
+                <>
+                <h2>Error</h2>
+                <p>File not found.  Check the address and try again.</p>
+                </>
+            );
+        } else if (this.state.fileNotFound) {
+            return (
+                <>
+                    <h2>Error</h2>
+                    <p>Story not found. Check the address and try again.</p>
+                </>
+            )
+        } else if (Object.keys(story).length) {
             const storyLines = story.content.map((line, index) => {
                 const wordButtons = line
                     .split(' ')
@@ -91,6 +123,7 @@ class Fabula extends Component {
                     </li>);
                 });
             return (
+
                 <>
                     <article className="Fabula__container">
                         <h3>{story.title}</h3>

@@ -15,6 +15,19 @@ class FabulaeList extends Component {
 
     state = {
         fabulae: [],
+        invalidURL: false,
+    }
+
+    validateURL = (genre) => {
+        if (!genre || (genre !== 'latinae' && genre !== 'romanae')) {
+            this.setState({
+                invalidURL: true,
+            });
+        } else {
+            this.setState({
+                invalidURL: false,
+            }, () => this.fetchFabulae(genre));
+        }
     }
 
     fetchFabulae = (genre) => {
@@ -45,13 +58,13 @@ class FabulaeList extends Component {
 
     componentDidMount() {
         const { genre } = this.props.match.params;
-        this.fetchFabulae(genre);
+        this.validateURL(genre);
     }
 
     componentDidUpdate(prevProps) {
         const { genre } = this.props.match.params;
         if (prevProps.match.params.genre !== genre) {
-            this.fetchFabulae(genre);
+            this.validateURL(genre);
         }
     }
 
@@ -81,10 +94,18 @@ class FabulaeList extends Component {
         }
         return (
             <main>
-                <h2>{`Fabulae ${genre.replace(genre.charAt(0), genre.charAt(0).toUpperCase())}`}</h2>
-                <ul>
-                    {contentPreview}
-                </ul>
+                {this.state.invalidURL ? 
+                    <>
+                        <h2>File not found</h2>
+                        <p>Check the address and try agian.</p>
+                    </> :
+                    <>
+                        <h2>{`Fabulae ${genre.replace(genre.charAt(0), genre.charAt(0).toUpperCase())}`}</h2>
+                        <ul>
+                            {contentPreview}
+                        </ul>
+                    </>
+    }
             </main>
         );
     }
