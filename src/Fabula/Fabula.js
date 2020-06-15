@@ -37,12 +37,20 @@ class Fabula extends Component {
             }),
         };
         fetch(url, options)
-            .then(res => res.json())
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+                throw new Error (res.statusText);
+            })
             .then(data => {
                 this.setState({
                     story: data,
                 });
                 console.log(data);
+            })
+            .catch(error => {
+                console.log('error', error);
             });
     }
 

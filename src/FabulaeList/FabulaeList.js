@@ -26,12 +26,20 @@ class FabulaeList extends Component {
         };
         console.log(url, options);
         fetch(url, options)
-            .then(res => res.json())
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+                throw new Error (res.statusText);
+            })
             .then(data => {
                 this.setState({
                     fabulae: data,
                 });
                 console.log(data);
+            })
+            .catch(error => {
+                console.log("error", error);
             });
     }
 
