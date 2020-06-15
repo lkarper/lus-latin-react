@@ -8,6 +8,7 @@ class Dictionary extends Component {
     state = {
         wordsData: {},
         exact: false,
+        badQuery: false,
     }
 
     onSearch = (word, exact) => {
@@ -33,19 +34,50 @@ class Dictionary extends Component {
             });
     }
 
+    validateURL = (search) => {
+        if (search && search !== "?exact=true" && search !== "?exact=false") {
+            this.setState({
+                badQuery: true,
+            });
+        } else {
+            this.setState({
+                badQuery: false,
+            }, () => {
+                const { word = "" } = this.props.match.params;
+                if (word && !this.state.badQuery) {
+                    const exact = this.props.location.search.split('=')[1] || "false";
+                    this.onSearch(word, exact);
+                }
+            });
+        }
+    }
+
     componentDidMount() {
-        const { word = "" } = this.props.match.params;
-        if (word) {
-            const exact = this.props.location.search.split('=')[1];
-            this.onSearch(word, exact);
+        const { search } = this.props.location;
+        this.validateURL(search);
+    }
+
+    componentDidUpdate(prevProps) {
+        const { search } = this.props.location;
+        if (prevProps.location.search !== this.props.location.search) {
+            this.validateURL(search);
         }
     }
 
     render() {
         return (
             <main>
-                <DictionaryForm onSearch={this.onSearch}/>
-                <DictionaryResult data={this.state.wordsData} exact={this.state.exact} />
+                {this.state.badQuery ?
+                    <>
+                        <h2>Page not found</h2>
+                        <p>Invalid address.  Check the address and try again.</p>
+                    </>
+                    :
+                    <>
+                        <DictionaryForm onSearch={this.onSearch}/>
+                        <DictionaryResult data={this.state.wordsData} exact={this.state.exact} />
+                    </>
+                }
             </main>
         );
     }
