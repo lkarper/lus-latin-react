@@ -10,7 +10,7 @@ class DictionaryForm extends Component {
     search = (e, exact) => {
         e.preventDefault();
         this.props.onSearch(this.state.word, exact);
-        this.props.history.push(`/dictionary/${this.state.word}/${exact ? 'exact' : ''}`);
+        this.props.history.push(`/dictionary/${this.state.word}?exact=${exact}`);
     }
 
     componentDidMount() {

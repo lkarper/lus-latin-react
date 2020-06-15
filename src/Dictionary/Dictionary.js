@@ -11,7 +11,7 @@ class Dictionary extends Component {
     }
 
     onSearch = (word, exact) => {
-        const url = `http://localhost:8000/dictionary?word=${word}&exact=${exact}`;
+        const url = `http://localhost:8000/dictionary/${word}?exact=${exact}`;
         const options = { 
             headers: new Headers({
                 "Authorization": `Bearer ${ENV.API_TOKEN || '6f06a6cd-90ea-4e28-ab97-9e02ba042203'}`,
@@ -34,11 +34,10 @@ class Dictionary extends Component {
     }
 
     componentDidMount() {
-        const { word = "", exact = "" } = this.props.match.params;
-        if (word && exact) {
-            this.onSearch(word, true);
-        } else if (word) {
-            this.onSearch(word, false);
+        const { word = "" } = this.props.match.params;
+        if (word) {
+            const exact = this.props.location.search.split('=')[1];
+            this.onSearch(word, exact);
         }
     }
 
