@@ -48,10 +48,10 @@ class WordsList extends Component {
             <div className="WordsList__container">
                 <div className="WordsList__currentWord">
                     <h3>Verbum Electum</h3>
-                    {Object.keys(this.props.currentWord).length ? currentWordHTML : <p>Click on a word to view its definition.</p>}
+                    {Object.keys(this.props.currentWord).length ? currentWordHTML : <p>Click on a word in the story to view its definition.</p>}
                 </div>
                 <div className="WordsList__list">
-                    <ol>
+                    <ol className={this.state.wordsList.length ? '' : 'WordsList__emptyList'}>
                         {this.state.wordsList.length ? wordsListHTML : <li>Looks like your Words List is empty at the moment.</li>}
                     </ol>
                 </div>
