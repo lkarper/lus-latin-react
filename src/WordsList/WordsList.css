@@ -7,3 +7,7 @@
     height: calc(100vh - 75px);
     width: 20%;
 }
+
+.WordsList__emptyList {
+    list-style: none;
+}
