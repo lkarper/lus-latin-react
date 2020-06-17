@@ -22,8 +22,7 @@ class Fabula extends Component {
         fileNotFound: false,
     }
 
-    setCurrentWord = (e, place) => {
-        e.preventDefault();
+    setCurrentWord = (place) => {
         const { story } = this.state;
         const currentWord = story.vocab[place];
         this.setState({
@@ -88,8 +87,8 @@ class Fabula extends Component {
         if (this.state.invalidURL) {
             return (
                 <>
-                <h2>Error</h2>
-                <p>File not found.  Check the address and try again.</p>
+                    <h2>Error</h2>
+                    <p>Page not found.  Check the address and try again.</p>
                 </>
             );
         } else if (this.state.fileNotFound) {
@@ -108,7 +107,7 @@ class Fabula extends Component {
                             return (
                                 <button 
                                     key={i} 
-                                    onClick={(e)=> this.setCurrentWord(e, `line:${index + 1}_word:${i + 1}`)}
+                                    onClick={(e)=> this.setCurrentWord(`line:${index + 1}_word:${i + 1}`)}
                                 >
                                     {word}
                                 </button>
@@ -122,7 +121,6 @@ class Fabula extends Component {
                     </li>);
                 });
             return (
-
                 <>
                     <article className="Fabula__container">
                         <h3>{story.title}</h3>
