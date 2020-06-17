@@ -7,6 +7,7 @@ import AP from '../AP/AP';
 import './Main.css';
 import Dictionary from '../Dictionary/Dictionary';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import DictionaryErrorBoundary from '../DictionaryErrorBoundary/DictionaryErrorBoundary';
 
 class Main extends Component {
     render() {
@@ -31,7 +32,13 @@ class Main extends Component {
                     />
                     <Route 
                         exact path={["/dictionary", "/dictionary/:word"]}
-                        component={Dictionary}
+                        render={routeProps => {
+                            return (
+                                <DictionaryErrorBoundary>
+                                    <Dictionary {...routeProps}/>
+                                </DictionaryErrorBoundary>
+                            );
+                        }}
                     />
                     <Route component={PageNotFound} />
                 </Switch>
