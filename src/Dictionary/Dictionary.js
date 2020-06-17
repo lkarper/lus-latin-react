@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import DictionaryForm from '../DictionaryForm/DictionaryForm';
 import DictionaryResult from '../DictionaryResult/DictionaryResult';
+import PropTypes from 'prop-types';
 import ENV from '../config';
 
 class Dictionary extends Component {
+
+    static defaultProps = {
+        match: {
+            params: {
+                word: '',
+            }
+        },
+        location: {
+            search: '',
+        }
+    }
 
     state = {
         wordsData: {},
@@ -31,6 +43,7 @@ class Dictionary extends Component {
             })
             .catch(error => {
                 console.log(error);
+                // TODO: update state for a bad fetch
             });
     }
 
@@ -81,6 +94,13 @@ class Dictionary extends Component {
             </main>
         );
     }
+}
+
+Dictionary.propTypes ={
+    match: PropTypes.object.isRequired,
+    location: PropTypes.shape({
+        search: PropTypes.oneOf(['', '?exact=true', '?exact=false']),
+    }),
 }
 
 export default Dictionary;
