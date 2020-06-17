@@ -43,7 +43,6 @@ class Fabula extends Component {
         }
     }
 
-    // TODO: update error handling for id not found
     fetchFabula = (genre, id) => {
         const url = `http://localhost:8000/fabulae/${genre}/${id}`;
         const options = { 
