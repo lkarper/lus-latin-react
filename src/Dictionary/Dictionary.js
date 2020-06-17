@@ -35,7 +35,7 @@ class Dictionary extends Component {
     }
 
     validateURL = (search) => {
-        if (search && search !== "?exact=true" && search !== "?exact=false") {
+        if ((search && search !== "?exact=true" && search !== "?exact=false") || (search && !this.props.match.params.word)) {
             this.setState({
                 badQuery: true,
             });
