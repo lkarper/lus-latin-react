@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FabulaRender from '../FabulaRender/FabulaRender';
 import WordsList from '../WordsList/WordsList';
 import ENV from '../config';
 import './Fabula.css';
@@ -62,6 +63,7 @@ class Fabula extends Component {
             .then(data => {
                 this.setState({
                     story: data,
+                    fileNotFound: false,
                 });
                 console.log(data);
             })
@@ -83,57 +85,14 @@ class Fabula extends Component {
     }
 
     render() {
-        const { story } = this.state;
-        if (this.state.invalidURL) {
+        
             return (
                 <>
-                    <h2>Error</h2>
-                    <p>Page not found.  Check the address and try again.</p>
-                </>
-            );
-        } else if (this.state.fileNotFound) {
-            return (
-                <>
-                    <h2>Error</h2>
-                    <p>Story not found. Check the address and try again.</p>
-                </>
-            )
-        } else if (Object.keys(story).length) {
-            const storyLines = story.content.map((line, index) => {
-                const wordButtons = line
-                    .split(' ')
-                    .map((word, i) => {
-                        if (Object.keys(story.vocab).includes(`line:${index + 1}_word:${i + 1}`)) {  
-                            return (
-                                <button 
-                                    key={i} 
-                                    onClick={(e)=> this.setCurrentWord(`line:${index + 1}_word:${i + 1}`)}
-                                >
-                                    {word}
-                                </button>
-                            );
-                        }
-                        return <span key={i}>{` ${word} `}</span>;
-                    }); 
-                return (
-                    <li key={index}>
-                        <p>{wordButtons}</p>
-                    </li>);
-                });
-            return (
-                <>
-                    <article className="Fabula__container">
-                        <h3>{story.title}</h3>
-                        <ol>
-                            {storyLines}
-                        </ol>
-                    </article>
+                    <FabulaRender data={{...this.state}} setCurrentWord={this.setCurrentWord} />
                     <WordsList currentWord={this.state.currentWord}/>
                 </>
             );
-        } else {
-            return <p className="Fabula__loading">Loading...</p>;
-        }
+
     }
 }
 
