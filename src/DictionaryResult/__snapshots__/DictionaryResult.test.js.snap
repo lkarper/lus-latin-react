@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DictionaryResult component renders the UI as expected when no data is passed in props 1`] = `
+<div>
+  <p>
+    Enter a word above to search the dictionary.
+  </p>
+</div>
+`;
