@@ -9,18 +9,20 @@ class WordsList extends Component {
 
     state = {
         wordsList: [],
+        vocabKeys: [],
     }
 
     addWord = () => {
         this.setState({
             wordsList: [...this.state.wordsList, this.props.currentWord],
+            vocabKeys: [...this.state.vocabKeys, Object.keys(this.props.currentWord)[0]]
         })
     }
 
     render() {
         const currentVocab = Object.keys(this.props.currentWord)[0];
         const currentDef = this.props.currentWord[currentVocab];
-        const added = this.state.wordsList.includes(this.props.currentWord);
+        const added = this.state.vocabKeys.includes(currentVocab);
         const currentWordHTML = (
             <>
                 <h4>{currentVocab}</h4>
