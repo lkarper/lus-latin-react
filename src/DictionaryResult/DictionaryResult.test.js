@@ -15,4 +15,9 @@ describe('DictionaryResult component', () => {
         const wrapper = shallow(<DictionaryResult />);
         expect(toJSON(wrapper)).toMatchSnapshot();
     });
+
+    it('renders the UI as expected when no match is found', () => {
+        const wrapper = shallow(<DictionaryResult data={{ match: false }} />);
+        expect(toJSON(wrapper)).toMatchSnapshot();
+    })
 });

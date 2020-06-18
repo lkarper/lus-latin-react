@@ -7,3 +7,11 @@ exports[`DictionaryResult component renders the UI as expected when no data is p
   </p>
 </div>
 `;
+
+exports[`DictionaryResult component renders the UI as expected when no match is found 1`] = `
+<div>
+  <p>
+    Sorry, no results found.  Please check your input and try again.
+  </p>
+</div>
+`;
