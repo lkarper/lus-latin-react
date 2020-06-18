@@ -14,7 +14,7 @@ const DictionaryResult = (props) => {
         } else {
             resultsHTML = (
                 <>
-                    {exact ? <h2>Exact Search Results</h2> :  <h2>Search Results:</h2>}
+                    {exact && exact === "true" ? <h2>Exact Search Results</h2> :  <h2>Search Results:</h2>}
                     <ol> 
                         {data.results.map(entry => {
                             const { declension, gender, key, main_notes, part_of_speech, senses, title_genitive, title_orthography } = entry;
@@ -52,7 +52,7 @@ DictionaryResult.defaultProps = {
 
 DictionaryResult.propTypes = {
     data: PropTypes.object,
-    exact: PropTypes.bool,
+    exact: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 }
 
 export default DictionaryResult;
