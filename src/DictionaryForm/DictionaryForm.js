@@ -33,6 +33,13 @@ class DictionaryForm extends Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        const { word = "" } = this.props.match.params;
+        if (prevState.word !== word) {
+            this.setState({ word });
+        } 
+    }
+
     render() {
         return (
         <form id="search-tools">
