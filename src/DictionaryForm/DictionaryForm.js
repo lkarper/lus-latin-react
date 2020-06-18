@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class DictionaryForm extends Component {
+
+    static defaultProps = {
+        match: {
+            params: {
+                word: '',
+            }
+        },
+        onSearch: () => {},
+        history: {
+            push: () => {},
+        },
+    }
 
     state = {
         word: '',
@@ -50,6 +63,18 @@ class DictionaryForm extends Component {
         </form>
         );
     }
+}
+
+DictionaryForm.propTypes = {
+    onSearch: PropTypes.func.isRequired,
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            word: PropTypes.string,
+        }),
+    }),
+    history: PropTypes.shape({
+        push: PropTypes.func.isRequired,
+    }),
 }
 
 export default withRouter(DictionaryForm);
