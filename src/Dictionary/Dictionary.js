@@ -72,8 +72,14 @@ class Dictionary extends Component {
 
     componentDidUpdate(prevProps) {
         const { search } = this.props.location;
-        if (prevProps.location.search !== this.props.location.search) {
-            this.validateURL(search);
+        if (prevProps.location.search !== search) {
+            if (search !== '') {
+                this.validateURL(search);
+            } else {
+                this.setState({
+                    wordsData: {},
+                });
+            }
         }
     }
 
