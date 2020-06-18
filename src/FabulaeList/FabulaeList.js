@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ENV from '../config';
+import FabulaeListRender from '../FabulaeListRender/FabulaeListRender';
 
 class FabulaeList extends Component {
 
@@ -16,6 +16,7 @@ class FabulaeList extends Component {
     state = {
         fabulae: [],
         invalidURL: false,
+        badFetch: false,
     }
 
     validateURL = (genre) => {
@@ -48,11 +49,15 @@ class FabulaeList extends Component {
             .then(data => {
                 this.setState({
                     fabulae: data,
+                    badFetch: false,
                 });
                 console.log(data);
             })
             .catch(error => {
                 console.log("error", error);
+                this.setState({
+                    badFetch: true,
+                });
             });
     }
 
@@ -69,44 +74,13 @@ class FabulaeList extends Component {
     }
 
     render() {
-        const genre = this.props.match.params.genre;
-        let contentPreview;
-
-        if (this.state.fabulae.length) {
-            contentPreview = this.state.fabulae.map(fab => {
-                const id = Object.keys(fab)[0];
-                const title = fab[id].title;
-                const preview = fab[id].preview;
-                return (
-                    <li key={id}>
-                        <h3>
-                            <Link 
-                                to={`/fabulae/${genre}/${id}`}        
-                            >
-                                {title}
-                            </Link></h3> 
-                        <p>{preview}</p>
-                    </li>
-                )
-            });
-        } else {
-            contentPreview = <p className="FabulaeList__loading">Loading...</p>
-        }
         return (
-            <main>
-                {this.state.invalidURL ? 
-                    <>
-                        <h2>File not found</h2>
-                        <p>Check the address and try agian.</p>
-                    </> :
-                    <>
-                        <h2>{`Fabulae ${genre.replace(genre.charAt(0), genre.charAt(0).toUpperCase())}`}</h2>
-                        <ul>
-                            {contentPreview}
-                        </ul>
-                    </>
-    }
-            </main>
+            <FabulaeListRender 
+                genre={this.props.match.params.genre}
+                fabulae={this.state.fabulae}
+                badFetch={this.state.badFetch}
+                invalidURL={this.state.invalidURL}
+            />
         );
     }
 }
