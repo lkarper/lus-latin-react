@@ -35,7 +35,7 @@ class FabulaeList extends Component {
         const url = `https://lus-latin-server.herokuapp.com/fabulae/${genre}`;
         const options = { 
             headers: new Headers({
-                "Authorization": `Bearer ${ENV.API_TOKEN || '6f06a6cd-90ea-4e28-ab97-9e02ba042203'}`,
+                "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN || '6f06a6cd-90ea-4e28-ab97-9e02ba042203'}`,
             }),
         };
         console.log(url, options);
