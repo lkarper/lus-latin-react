@@ -44,7 +44,7 @@ class Fabula extends Component {
     }
 
     fetchFabula = (genre, id) => {
-        const url = `http://localhost:8000/fabulae/${genre}/${id}`;
+        const url = `https://lus-latin-server.herokuapp.com/fabulae/${genre}/${id}`;
         const options = { 
             headers: new Headers({
                 "Authorization": `Bearer ${ENV.API_TOKEN || '6f06a6cd-90ea-4e28-ab97-9e02ba042203'}`,
