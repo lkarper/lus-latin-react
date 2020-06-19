@@ -25,7 +25,6 @@ class Dictionary extends Component {
 
     onSearch = (word, exact) => {
         const url = `https://lus-latin-server.herokuapp.com/dictionary/${word}?exact=${exact}`;
-        console.log(process.env.REACT_APP_API_TOKEN);
         const options = { 
             headers: new Headers({
                 "Authorization": `Bearer ${process.env.REACT_APP_API_TOKEN || '6f06a6cd-90ea-4e28-ab97-9e02ba042203'}`,
@@ -39,7 +38,6 @@ class Dictionary extends Component {
                 throw new Error (response.statusText);
             })
             .then(wordsData => {
-                console.log(wordsData);
                 this.setState({wordsData, exact});
             })
             .catch(error => {
