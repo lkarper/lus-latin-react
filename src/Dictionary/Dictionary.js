@@ -77,6 +77,7 @@ class Dictionary extends Component {
             } else {
                 this.setState({
                     wordsData: {},
+                    badQuery: false,
                 });
             }
         }

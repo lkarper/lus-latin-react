@@ -33,9 +33,9 @@ class DictionaryForm extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         const { word = "" } = this.props.match.params;
-        if (prevState.word !== word) {
+        if (this.props.match.params.word !== prevProps.match.params.word) {
             this.setState({ word });
         } 
     }
