@@ -84,15 +84,13 @@ class Fabula extends Component {
         }
     }
 
-    render() {
-        
-            return (
-                <>
-                    <FabulaRender data={{...this.state}} setCurrentWord={this.setCurrentWord} />
-                    <WordsList currentWord={this.state.currentWord}/>
-                </>
-            );
-
+    render() {        
+        return (
+            <>
+                <FabulaRender data={{...this.state}} setCurrentWord={this.setCurrentWord} />
+                <WordsList currentWord={this.state.currentWord}/>
+            </>
+        );
     }
 }
 
